@@ -132,7 +132,6 @@ annotate TravelService.Booking with @UI : {
   },
   SelectionFields : [],
   LineItem : [
-    { Value : to_Carrier.AirlinePicURL,  Label : '  '},
     { Value : BookingID              },
     { Value : BookingDate            },
     { Value : to_Customer_CustomerID },
@@ -151,11 +150,6 @@ annotate TravelService.Booking with @UI : {
       ID     : 'BookingData',
       Target : '@UI.FieldGroup#GeneralInformation',
       Label  : '{i18n>Booking}'
-    }, {  // flight details
-      $Type  : 'UI.ReferenceFacet',
-      ID     : 'FlightData',
-      Target : '@UI.FieldGroup#Flight',
-      Label  : '{i18n>Flight}'
     }]
   }, {  // supplements list
     $Type  : 'UI.ReferenceFacet',
@@ -164,16 +158,6 @@ annotate TravelService.Booking with @UI : {
   }],
   FieldGroup #GeneralInformation : { Data : [
     { Value : BookingID              },
-    { Value : BookingDate,           },
-    { Value : to_Customer_CustomerID },
-    { Value : BookingDate,           },
-    { Value : BookingStatus_code     }
-  ]},
-  FieldGroup #Flight : { Data : [
-    { Value : to_Carrier_AirlineID   },
-    { Value : ConnectionID           },
-    { Value : FlightDate             },
-    { Value : FlightPrice            },
     { Value : to_Flight.PlaneType    }
   ]},
 };
