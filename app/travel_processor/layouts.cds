@@ -173,7 +173,8 @@ annotate TravelService.Booking with @UI : {
     { Value : to_Carrier_AirlineID   },
     { Value : ConnectionID           },
     { Value : FlightDate             },
-    { Value : FlightPrice            }
+    { Value : FlightPrice            },
+    { Value : to_Flight.PlaneType    }
   ]},
 };
 
