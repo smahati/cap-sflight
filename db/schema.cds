@@ -1,4 +1,6 @@
 using { Currency, custom.managed, sap.common.CodeList } from './common';
+using {sap.sme.changelog.ChangeView as ChangeView} from '@sap/cap-change-history';
+
 using {
   sap.fe.cap.travel.Airline,
   sap.fe.cap.travel.Passenger,
@@ -9,19 +11,30 @@ using {
 
 namespace sap.fe.cap.travel;
 
+@title: '{"Travel"}'
+@changehistory.objectID: [TravelUUID]
 entity Travel : managed {
   key TravelUUID : UUID;
+  @changehistory
   TravelID       : Integer @readonly default 0;
+  @changehistory
   BeginDate      : Date;
+  @changehistory
   EndDate        : Date;
+  @changehistory
   BookingFee     : Decimal(16, 3);
+  @changehistory
   TotalPrice     : Decimal(16, 3) @readonly;
   CurrencyCode   : Currency;
+  @changehistory
   Description    : String(1024);
+  @changehistory
   TravelStatus   : Association to TravelStatus @readonly;
+  changes : Association to many ChangeView on changes.entityKey = TravelUUID;
   to_Agency      : Association to TravelAgency;
   to_Customer    : Association to Passenger;
   to_Booking     : Composition of many Booking on to_Booking.to_Travel = $self;
+  
 };
 
 annotate Travel with @(

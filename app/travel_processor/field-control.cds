@@ -77,7 +77,7 @@ annotate TravelService.BookingSupplement {
   to_Supplement @Common.FieldControl  : to_Travel.TravelStatus.fieldControl;
   to_Booking    @Common.FieldControl  : to_Travel.TravelStatus.fieldControl;
   to_Travel     @Common.FieldControl  : to_Travel.TravelStatus.fieldControl;
-
+  changes     @Common.FieldControl  : to_Travel.TravelStatus.fieldControl;
 };
 
 annotate Currency with @Common.UnitSpecificScale : 'Decimals';

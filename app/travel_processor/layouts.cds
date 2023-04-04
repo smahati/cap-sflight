@@ -1,4 +1,5 @@
 using TravelService from '../../srv/travel-service';
+using  from '@sap/cap-change-history/app/annotations';
 
 //
 // annotatios that control the fiori layout
@@ -94,6 +95,12 @@ annotate TravelService.Travel with @UI : {
     ID     : 'BookingList',
     Target : 'to_Booking/@UI.PresentationVariant',
     Label  : '{i18n>Bookings}'
+  },
+  {  // changes
+    $Type  : 'UI.ReferenceFacet',
+    ID     : 'ChangeHistoryFacet',
+    Target : 'changes/@UI.PresentationVariant',
+    Label  : 'Changes'
   }],
   FieldGroup#TravelData : { Data : [
     { Value : TravelID               },

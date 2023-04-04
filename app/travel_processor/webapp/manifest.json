@@ -153,6 +153,7 @@
                     "route": "BookingObjectPage"
                   }
                 }
+
               },
               "controlConfiguration": {
                 "to_Booking/@com.sap.vocabularies.UI.v1.LineItem": {

@@ -1,13 +1,9 @@
 using { sap.fe.cap.travel as my } from '../db/schema';
+using {sap.sme.changelog.ChangeView as ChangeView} from '@sap/cap-change-history';
 
 service TravelService @(path:'/processor') {
 
-  @(restrict: [
-    { grant: 'READ', to: 'authenticated-user'},
-    { grant: ['rejectTravel','acceptTravel','deductDiscount'], to: 'reviewer'},
-    { grant: ['*'], to: 'processor'},
-    { grant: ['*'], to: 'admin'}
-  ])
+
   entity Travel as projection on my.Travel actions {
     action createTravelByTemplate() returns Travel;
     action rejectTravel();
