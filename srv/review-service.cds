@@ -11,3 +11,8 @@ service ReviewService @(path:'/reviewer') {
     rating  : Decimal;
   }
 }
+
+service RemoteReviewService {
+
+  event Review : projection on  my.TravelReview {TravelID,Rating,Email,Comment}
+}

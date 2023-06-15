@@ -25,6 +25,8 @@ cds:
     odata-v4:
         endpoint:
             path: "/"
+    remote.services:
+      - "RemoteReviewService"
     messaging:
       services:
       - name: "messaging"
