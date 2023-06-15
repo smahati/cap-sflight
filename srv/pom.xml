@@ -24,6 +24,11 @@
       <groupId>com.sap.cds</groupId>
       <artifactId>cds-starter-cloudfoundry</artifactId>
     </dependency>
+    
+    <dependency>
+		<groupId>com.sap.cds</groupId>
+		<artifactId>cds-feature-dev-dashboard</artifactId>
+	</dependency>
 
     <dependency>
       <groupId>com.h2database</groupId>
