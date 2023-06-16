@@ -1,5 +1,18 @@
 {
-	"sql": {
-		"dialect": "plain"
-	}
+  "sql": {
+    "dialect": "plain"
+  },
+  "profiles": [
+    "with-mtx-sidecar",
+    "java"
+  ],
+  "build": {
+    "target": "."
+  },
+  "requires": {
+    "multitenancy": true,
+    "outbox": {
+       "kind": "persistent-outbox"
+    }
+  }
 }
