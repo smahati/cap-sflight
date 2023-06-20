@@ -13,9 +13,11 @@ import com.sap.cds.services.handler.annotations.On;
 import com.sap.cds.services.handler.annotations.ServiceName;
 import com.sap.cds.services.mt.TenantInfo;
 import com.sap.cds.services.mt.TenantProviderService;
+import com.sap.cds.services.runtime.CdsRuntime;
 import com.sap.cds.services.utils.dashboard.DashboardUtils;
 
 import cds.gen.remotereviewservice.RemoteReviewService_;
+import cds.gen.remotereviewservice.Review;
 import cds.gen.remotereviewservice.ReviewContext;
 import cds.gen.reviewservice.ReviewService_;
 import cds.gen.reviewservice.TravelReview;
@@ -36,37 +38,34 @@ public class RemoteReviewHandler implements EventHandler {
 	@On
 	public void onReview(ReviewContext context) {
 
-		List<TenantInfo> tenants = tenantService.readTenantsInfo();
+		CdsRuntime cdsRuntime = context.getCdsRuntime();
+		Review data = context.getData();
+		DashboardUtils.create(cdsRuntime).consoleInfo("new review: " + data.toJson());
 
 		TravelReview review = TravelReview.create();
-		review.setComment(context.getData().getComment());
-		review.setEmail(context.getData().getEmail());
-		review.setRating(context.getData().getRating());
-		review.setTravelID(context.getData().getTravelID());
-
-		DashboardUtils.create(context.getCdsRuntime()).consoleInfo("review received!");
+		review.setComment(data.getComment());
+		review.setEmail(data.getEmail());
+		review.setRating(data.getRating());
+		review.setTravelID(data.getTravelID());
 
 		// apply to all tenants
+		List<TenantInfo> tenants = tenantService.readTenantsInfo();
 		if (tenants != null && !tenants.isEmpty()) {
 			tenantService.readTenantsInfo().forEach(tenant -> {
-				context.getCdsRuntime().requestContext().modifyUser(u -> {u.setTenant(tenant.getTenant()); u.setName(review.getCreatedBy());}).run(req -> {
-					context.getCdsRuntime().changeSetContext().run(ch ->  {
+				cdsRuntime.requestContext().modifyUser(u -> {u.setTenant(tenant.getTenant()); u.setName(review.getCreatedBy());}).run(req -> {
+					cdsRuntime.changeSetContext().run(ch ->  {
 						reviewService.run(Insert.into(ReviewService_.TRAVEL_REVIEW).entry(review));
 					});
 				});
 			});
 			// otherwise single tenant
 		} else {
-			context.getCdsRuntime().requestContext().run(req -> {
-				context.getCdsRuntime().changeSetContext().run(ch ->  {
+			cdsRuntime.requestContext().run(req -> {
+				cdsRuntime.changeSetContext().run(ch ->  {
 					reviewService.run(Insert.into(ReviewService_.TRAVEL_REVIEW).entry(review));
 				});
 			});
 		}
-
-
-		System.out.println("review received!");
 	}
-
 
 }
