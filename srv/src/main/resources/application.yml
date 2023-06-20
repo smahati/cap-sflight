@@ -3,8 +3,14 @@ management:
         web:
             exposure:
                 include: "*"
-
+logging.level:
+    root: ERROR
+    com.sap.cds.persistence: DEBUG
+    com.sap.cds.handlers: DEBUG
+spring:
+    web.resources.static-locations: "file:./app"
 cds:
+    odata-v4.endpoint.path: "/"
     security.mock.users:
       - name: rose
         tenant: t1
@@ -26,21 +32,27 @@ cds:
 
 ---
 spring:
-    config.activate.on-profile: default
-    web.resources.static-locations: "file:./app"
+  config.activate.on-profile: default
+  sql.init.mode: always
+  data-source:
+    url: "jdbc:sqlite:file::memory:?cache=shared"
+    driver-class-name: org.sqlite.JDBC
+    hikari:
+      maximum-pool-size: 1
+      max-lifetime: 0
 logging.level.com.sap.cds.messaging: DEBUG
+server.port: 4004
 cds:
-    odata-v4:
-        endpoint:
-            path: "/"
-
-server:
-    port: 8080
-
+  messaging:
+    services:
+    - name: "messaging"
+      kind: "file-based-messaging"
+      binding: "local-messaging.txt"
 
 ---
-spring:
-  config.activate.on-profile: local-mtxs
+spring.config.activate.on-profile: local-mtxs
+logging.level.com.sap.cds.messaging: DEBUG
+server.port: 4004
 cds:
   data-source:
     auto-config.enabled: true
@@ -62,6 +74,4 @@ spring:
 cds:
     datasource:
         csv.initialization-mode: never
-    odata-v4:
-        endpoint:
-            path: "/"
+
