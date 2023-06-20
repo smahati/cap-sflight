@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 
 import com.sap.cds.Row;
 import com.sap.cds.ql.Select;
+import com.sap.cds.reflect.CdsBaseType;
 import com.sap.cds.services.cds.CqnService;
 import com.sap.cds.services.handler.EventHandler;
 import com.sap.cds.services.handler.annotations.After;
@@ -33,7 +34,7 @@ public class ReviewHandler implements EventHandler {
 	public void afterReviewWrite(TravelReview travelReview) {
 
 		Select<TravelReview_> averageRatingQuery = Select.from(ReviewService_.TRAVEL_REVIEW)
-				.columns(t -> t.Rating().average().as("average"), t -> t.Rating().countDistinct().as("reviewCount"))
+				.columns(t -> t.Rating().average().type(CdsBaseType.DECIMAL).as("average"), t -> t.Rating().countDistinct().as("reviewCount"))
 				.where(t -> t.TravelID().eq(travelReview.getTravelID()));
 
 		Row resultRow = reviewService.run(averageRatingQuery).single();
@@ -41,7 +42,7 @@ public class ReviewHandler implements EventHandler {
 
 		Reviewed reviewed = Reviewed.create();
 		reviewed.setCount(Integer.valueOf(resultRow.get("reviewCount").toString()));
-		reviewed.setRating(BigDecimal.valueOf(5L));
+		reviewed.setRating((BigDecimal) resultRow.get("average"));
 		reviewed.setSubject(travelReview.getTravelID());
 
 		ReviewedContext reviewedContext = ReviewedContext.create();
