@@ -126,7 +126,13 @@
               "controlConfiguration": {
                 "@com.sap.vocabularies.UI.v1.SelectionFields": {
                   "useSemanticDateRange": true
-                }
+                },
+                "@com.sap.vocabularies.UI.v1.LineItem": {
+                "tableSettings": {
+
+                    "enableMassEdit": true
+                  }
+                  }
               },
               "variantManagement": "Page",
               "initialLoad": true,
@@ -158,14 +164,7 @@
                 "to_Booking/@com.sap.vocabularies.UI.v1.LineItem": {
                   "tableSettings": {
                     "type": "ResponsiveTable",
-                    "personalization": {
-                      "column": true,
-                      "sort": false
-                    },
-                    "creationMode": {
-                      "name": "Inline",
-                      "createAtEnd": true
-                    }
+                    "enableMassEdit": true
                   }
                 }
               },
