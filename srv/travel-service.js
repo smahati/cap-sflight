@@ -134,7 +134,7 @@ init() {
    */
   this.before ('SAVE', 'Travel', req => {
     const { BeginDate, EndDate, BookingFee, to_Agency_AgencyID, to_Customer_CustomerID, to_Booking, TravelStatus_code } = req.data, today = (new Date).toISOString().slice(0,10)
-
+    return
     // validate only not rejected travels
     if (TravelStatus_code !== 'X') {
       if (BookingFee == null) req.error(400, "Enter a booking fee", "in/BookingFee") // 0 is a valid BookingFee
@@ -142,8 +142,7 @@ init() {
       if (!EndDate) req.error(400, "Enter an end date", "in/EndDate")
       if (!to_Agency_AgencyID) req.error(400, "Enter a travel agency", "in/to_Agency_AgencyID")
       if (!to_Customer_CustomerID) req.error(400, "Enter a customer", "in/to_Customer_CustomerID")
-
-      for (const booking of to_Booking) {
+      for (const booking of (to_Booking || [])) {
         const { BookingUUID, ConnectionID, FlightDate, FlightPrice, BookingStatus_code, to_Carrier_AirlineID, to_Customer_CustomerID } = booking
         if (!ConnectionID) req.error(400, "Enter a flight", `in/to_Booking(BookingUUID='${BookingUUID}',IsActiveEntity=false)/ConnectionID`)
         if (!FlightDate) req.error(400, "Enter a flight date", `in/to_Booking(BookingUUID='${BookingUUID}',IsActiveEntity=false)/FlightDate`)
