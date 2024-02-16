@@ -1,0 +1,11 @@
+VIEW sap_fe_cap_travel_TravelAgency AS SELECT
+  "AgencyID"         AS AgencyID,
+  "Name"             AS Name,
+  "Street"           AS Street,
+  "PostalCode"       AS PostalCode,
+  "City"             AS City,
+  "CountryCode_code" AS CountryCode_code,
+  "PhoneNumber"      AS PhoneNumber,
+  "EMailAddress"     AS EMailAddress,
+  "WebAddress"       AS WebAddress
+FROM "TravelAgency_ABAP"

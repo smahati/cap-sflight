@@ -83,17 +83,24 @@ entity Passenger : managed, MasterData {
   EMailAddress   : String(256);
 };
 
+
+
+
+@cds.persistence.exists
 entity TravelAgency : MasterData {
   key AgencyID : String(6);
   Name         : String(80);
   Street       : String(60);
   PostalCode   : String(10);
   City         : String(40);
-  CountryCode  : Country;
+  //CountryCode  : Country;
+  CountryCode_code : String(3);
   PhoneNumber  : String(30);
   EMailAddress : String(256);
   WebAddress   : String(256);
 };
+
+
 
 
 //
@@ -108,3 +115,43 @@ entity SupplementType : sap.common.CodeList {
     Extra    = 'EX';
   };
 }
+
+
+/* ABAP:
+
+type User : String(255);
+
+entity Airline  {
+  key AirlineID : String(3);
+  Name          : String(40);
+  CurrencyCode_code  : String(3); // Currency;
+  AirlinePicURL : String;
+};
+
+entity Passenger {
+  key CustomerID : String(6);
+  FirstName      : String(40);
+  LastName       : String(40);
+  Title          : String(10);
+  Street         : String(60);
+  PostalCode     : String(10);
+  City           : String(40);
+  CountryCode_code    : String(3);  //Country;
+  PhoneNumber    : String(30);
+  EMailAddress   : String(256);
+};
+
+entity TravelAgency  {
+  key AgencyID : String(6);
+  Name         : String(80);
+  Street       : String(60);
+  PostalCode   : String(10);
+  City         : String(40);
+  CountryCode_code  : String(3);  //Country;
+  PhoneNumber  : String(30);
+  EMailAddress : String(256);
+  WebAddress   : String(256);
+};
+
+
+*/

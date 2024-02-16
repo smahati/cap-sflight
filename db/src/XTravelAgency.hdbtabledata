@@ -1,0 +1,41 @@
+{
+  "format_version": 1,
+  "imports": [
+    {
+      "target_table": "XTRAVELAGENCY",
+      "source_data": {
+        "data_type": "CSV",
+        "file_name": "XTravelAgency.csv",
+        "has_header": true,
+        "type_config": {
+          "delimiter": ";"
+        }
+      },
+      "import_settings": {
+        "import_columns": [
+          "AGENCYID",
+          "NAME",
+          "STREET",
+          "POSTALCODE",
+          "CITY",
+          "COUNTRYCODE_CODE",
+          "PHONENUMBER",
+          "EMAILADDRESS",
+          "WEBADDRESS"
+        ],
+        "include_filter": []
+      },
+      "column_mappings": {
+        "AGENCYID": "AgencyID",
+        "NAME": "Name",
+        "STREET": "Street",
+        "POSTALCODE": "PostalCode",
+        "CITY": "City",
+        "COUNTRYCODE_CODE": "CountryCode_code",
+        "PHONENUMBER": "PhoneNumber",
+        "EMAILADDRESS": "EMailAddress",
+        "WEBADDRESS": "WebAddress"
+      }
+    }
+  ]
+}

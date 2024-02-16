@@ -255,7 +255,7 @@ annotate schema.Passenger {
 
 annotate schema.TravelAgency {
 
-  CountryCode @Common.ValueList: {
+  CountryCode_code @Common.ValueList: {
     CollectionPath : 'Countries',
     Label : '',
     Parameters : [

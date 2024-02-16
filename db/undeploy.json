@@ -1,0 +1,9 @@
+[
+  "src/gen/**/*.hdbtable",
+  "src/gen/**/*.hdbview",
+  "src/gen/**/*.hdbindex",
+  "src/gen/**/*.hdbconstraint",
+  "src/gen/**/*.hdbcalculationview",
+  "src/gen/**/*.hdbtabledata",
+  "src/*.hdbsynonym"
+]

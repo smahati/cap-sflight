@@ -55,7 +55,7 @@ annotate schema.TravelAgency with @title: '{i18n>TravelAgency}' {
   Street       @title: '{i18n>Street}';
   PostalCode   @title: '{i18n>PostalCode}';
   City         @title: '{i18n>City}';
-  CountryCode  @title: '{i18n>CountryCode}';
+  CountryCode_code  @title: '{i18n>CountryCode}';
   PhoneNumber  @title: '{i18n>PhoneNumber}';
   EMailAddress @title: '{i18n>EMailAddress}';
   WebAddress   @title: '{i18n>WebAddress}';

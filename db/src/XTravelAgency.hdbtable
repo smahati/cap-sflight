@@ -1,0 +1,15 @@
+COLUMN TABLE XTravelAgency (
+  AgencyID NVARCHAR(6) NOT NULL,
+  Name NVARCHAR(80),
+  Street NVARCHAR(60),
+  PostalCode NVARCHAR(10),
+  City NVARCHAR(40),
+  CountryCode_code NVARCHAR(3),
+  PhoneNumber NVARCHAR(30),
+  EMailAddress NVARCHAR(256),
+  WebAddress NVARCHAR(256),
+  PRIMARY KEY(AgencyID)
+)
+-- WITH ASSOCIATIONS (
+--  MANY TO ONE JOIN sap_common_Countries AS CountryCode ON (CountryCode.code = CountryCode_code)
+--)
