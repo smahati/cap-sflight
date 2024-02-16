@@ -1,0 +1,85 @@
+{
+  "services": {
+    "LaunchPage": {
+      "adapter": {
+        "config": {
+          "catalogs": [],
+          "groups": [
+            {
+              "id": "Travel",
+              "title": "Travel  0",
+              "isPreset": true,
+              "isVisible": true,
+              "isGroupLocked": false,
+              "tiles": [
+                {
+                  "id": "process-travel",
+                  "tileType": "sap.ushell.ui.tile.StaticTile",
+                  "properties": {
+                    "targetURL": "#travel-process",
+                    "title": "Process travel 1",
+                    "description": "Process travel 1"
+                  }
+                },
+                {
+                  "id": "analyze-travel",
+                  "tileType": "sap.ushell.ui.tile.StaticTile",
+                  "properties": {
+                    "targetURL": "#booking-process",
+                    "title": "Analyze travel booking 2",
+                    "description": "Analyze travel booking 2"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "NavTargetResolution": {
+      "config": {
+        "enableClientSideTargetResolution": true
+      }
+    },
+    "ClientSideTargetResolution": {
+      "adapter": {
+        "config": {
+          "inbounds": {
+            "travel-inbound": {
+              "signature": {
+                "parameters": {},
+                "additionalParameters": "allowed"
+              },
+              "semanticObject": "travel",
+              "action": "process",
+              "title": "Process Travels",
+              "subTitle": "Process travels",
+              "icon": "sap-icon://flight",
+              "resolutionResult": {
+                "applicationType": "SAPUI5",
+                "additionalInformation": "SAPUI5.Component=sap.fe.cap.travel",
+                "url": "/travel_processor/webapp"
+              }
+            },
+            "travel-alp-inbound": {
+              "signature": {
+                "parameters": {},
+                "additionalParameters": "allowed"
+              },
+              "semanticObject": "booking",
+              "action": "process",
+              "title": "Analyze Travels",
+              "subTitle": "Analyze travels",
+              "icon": "sap-icon://flight",
+              "resolutionResult": {
+                "applicationType": "SAPUI5",
+                "additionalInformation": "SAPUI5.Component=sap.fe.cap.travel_analytics",
+                "url": "/travel_analytics/webapp"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

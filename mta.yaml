@@ -1,7 +1,7 @@
 _schema-version: "3.2"
 ID: capire.sflight
 version: 1.0.0
-description: "CAP sflight demo"
+description: "CAP sflight demo - ABAP Experiments"
 
 parameters:
   enable-parallel-deployments: true
@@ -19,6 +19,9 @@ modules:
   # ------------------------------------------------------------
     type: nodejs
     path: gen/srv
+    description: "My Description 1"
+    parameters:
+      description: "My Description 4"
     requires:
       - name: sflight-db
       - name: sflight-uaa
@@ -43,86 +46,35 @@ modules:
     build-parameters:
       ignore: ["node_modules/"]
 
-  # ------------------ APPLICATION CONTENT ---------------------
-  - name: sflight-appcontent
-  # ------------------------------------------------------------
-    type: com.sap.application.content
-    path: app
-    requires:
-      - name: sflight-destination-service
-      - name: sflight-html5-repo-host
-        parameters:
-          content-target: true
-    build-parameters:
-      build-result: resources
-      requires:
-        - name: sflight-app-travel-processor
-          artifacts:
-            - travel-processor.zip
-          target-path: resources/
-        - name: sflight-app-travel-analytics
-          artifacts:
-            - travel-analytics.zip
-          target-path: resources/
 
-  # ------------- APPLICATION: TRAVEL PROCESSOR ----------------
-  - name: sflight-app-travel-processor
+  # ------------------ APPROUTER MODULE ------------------------
+  - name: sflight
   # ------------------------------------------------------------
-    type: html5
-    path: app/travel_processor
-    build-parameters:
-      build-result: dist
-      builder: custom
-      commands:
-        - npm ci
-        - npm run build
-      supported-platforms: []
-
-  # ------------- APPLICATION: TRAVEL ANALYTICS ----------------
-  - name: sflight-app-travel-analytics
-  # ------------------------------------------------------------
-    type: html5
-    path: app/travel_analytics
-    build-parameters:
-      build-result: dist
-      builder: custom
-      commands:
-        - npm ci
-        - npm run build
-      supported-platforms: []
-
-  # ------------------ DESTINATION CONTENT ---------------------
-  - name: sflight-destinationcontent
-  # ------------------------------------------------------------
-    type: com.sap.application.content
-    build-parameters:
-      no-source: true
-    requires:
-      - name: sflight-uaa
-        parameters:
-          service-key:
-            name: sflight-uaa-key
-      - name: sflight-html5-repo-host
-        parameters:
-          service-key:
-            name: sflight-html5-repo-host-key
-      - name: sflight-destination-service
-        parameters:
-          content-target: true
+    type: approuter.nodejs
+    path: app/
+    description: "My Description 2"
     parameters:
-      content:
-        instance:
-          existing_destinations_policy: update
-          destinations:
-            - Name: sflight-html5-repository
-              ServiceInstanceName: sflight-html5-repo-host
-              ServiceKeyName: sflight-html5-repo-host-key
-              sap.cloud.service: sap.fe.cap.sflight
-            - Name: sflight-uaa
-              Authentication: OAuth2UserTokenExchange
-              ServiceInstanceName: sflight-uaa
-              ServiceKeyName: sflight-uaa-key
-              sap.cloud.service: sap.fe.cap.sflight
+      description: "My Description 3"
+      keep-existing-routes: true
+      disk-quota: 1024M
+      memory: 512M
+    requires:
+      - name: srv-api
+        group: destinations
+        properties:
+          name: backend # must be used in xs-app.json as well
+          url: ~{srv-url}
+          forwardAuthToken: true
+      - name: sflight-uaa
+    provides:
+      - name: app-api
+        properties:
+          url: ${default-url}
+    properties:
+      CORS: '[{"uriPattern": "^/sap/bc/ina/(.*)$", "allowedOrigin": [{"host":"sac-rel-hc-2tenant.rel.hanacloudservices.cloud.sap", "protocol":"https"},{"host":"master-fpa10-t02.master.canary.eu10.projectorca.cloud", "protocol":"https"},{"host":"osqy7pkzpt5ryrv4rpjut1d.master.canary.eu10.projectorca.cloud", "protocol":"https"}], "allowedMethods": ["GET", "POST", "OPTIONS"], "allowedHeaders": ["Origin", "Accept", "X-Requested-With", "Content-Type", "Access-Control-Request-Method", "Access-Control-Request-Headers", "Authorization", "X-Sap-Cid", "X-Csrf-Token", "application-id"], "exposeHeaders": ["Accept", "Authorization", "X-Requested-With", "X-Sap-Cid", "Access-Control-Allow-Origin", "Access-Control-Allow-Credentials", "X-Csrf-Token", "Content-Type"]}]'
+      COOKIES: '{"SameSite": "None"}'
+      SESSION_TIMEOUT: 120
+
 
 resources:
   # ------------------------------------------------------------
@@ -159,44 +111,4 @@ resources:
             description: Manage travels
             role-template-references:
               - $XSAPPNAME.admin
-
-  # ------------------------------------------------------------
-  - name: sflight-html5-repo-runtime
-  # ------------------------------------------------------------
-    type: org.cloudfoundry.managed-service
-    parameters:
-      service: html5-apps-repo
-      service-plan: app-runtime
-
-  # ------------------------------------------------------------
-  - name: sflight-html5-repo-host
-  # ------------------------------------------------------------
-    type: org.cloudfoundry.managed-service
-    parameters:
-      service: html5-apps-repo
-      service-plan: app-host
-
-  # ------------------------------------------------------------
-  - name: sflight-destination-service
-  # ------------------------------------------------------------
-    type: org.cloudfoundry.managed-service
-    requires:
-      - name: srv-api
-    parameters:
-      service: destination
-      service-plan: lite
-      config:
-        version: 1.0.0
-        HTML5Runtime_enabled: true
-        init_data:
-          instance:
-            existing_destinations_policy: update
-            destinations:
-              - Name: sflight-srv
-                URL: ~{srv-api/srv-url}
-                Authentication: NoAuthentication
-                Type: HTTP
-                ProxyType: Internet
-                HTML5.ForwardAuthToken: true
-                HTML5.DynamicDestination: true
 

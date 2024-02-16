@@ -1,0 +1,42 @@
+{
+  "welcomeFile": "app/index.html",
+  "authenticationMethod": "route",
+  "routes": [
+    {
+      "source": "^/app/(.*)$",
+      "cacheControl": "no-cache, no-store, must-revalidate",
+      "target": "$1",
+      "localDir": "./",
+      "authenticationType": "xsuaa"
+    },
+    {
+      "source": "^/appconfig/(.*)$",
+      "localDir": "./",
+      "authenticationType": "xsuaa"
+    },
+    {
+      "source": "^/(.*)/analytics/(.*)$",
+      "target": "/alp/$2",
+      "destination": "backend",
+      "authenticationType": "xsuaa",
+      "csrfProtection": false
+    },
+    {
+      "source": "^/(.*)/processor/(.*)$",
+      "target": "/processor/$2",
+      "destination": "backend",
+      "authenticationType": "xsuaa",
+      "csrfProtection": false
+    },
+    {
+      "source": "^/analytics/webapp/(.*)$",
+      "localDir": "./",
+      "authenticationType": "xsuaa"
+    },
+    {
+      "source": "^/travel_processor/webapp/(.*)$",
+      "localDir": "./",
+      "authenticationType": "xsuaa"
+    }
+  ]
+}
