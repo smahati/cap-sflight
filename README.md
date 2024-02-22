@@ -63,12 +63,12 @@ cds bind -2 <hdi-instance>:<service-key>
 `service-key` is the name of the corresponding service key.  
 Example: `cds bind -2 db-sflight:db-sflight-key`.
 
+Get credentials ...
+```
+cds env get requires.db.credentials --profile hybrid --resolve-bindings
+```
 
-Then run the Java app as described above.
-
-For details, see [capire/advanced/hybrid-testing#services-on-cloud-foundry](https://pages.github.tools.sap/cap/docs/advanced/hybrid-testing#services-on-cloud-foundry).
-
-
+More info: [capire/advanced/hybrid-testing#services-on-cloud-foundry](https://pages.github.tools.sap/cap/docs/advanced/hybrid-testing#services-on-cloud-foundry).
 
 
 
