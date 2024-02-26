@@ -23,7 +23,7 @@ modules:
     parameters:
       description: "My Description 4"
     requires:
-      - name: sflight-db
+      - name: sflight-abap-db
       - name: sflight-uaa
     provides:
       - name: srv-api # required by consumers of CAP services (e.g. approuter, destinations)
@@ -41,7 +41,7 @@ modules:
     parameters:
       buildpack: nodejs_buildpack
     requires:
-      - name: sflight-db
+      - name: sflight-abap-db
       - name: sflight-uaa
     build-parameters:
       ignore: ["node_modules/"]
@@ -78,7 +78,7 @@ modules:
 
 resources:
   # ------------------------------------------------------------
-  - name: sflight-db
+  - name: sflight-abap-db
   # ------------------------------------------------------------
     type: com.sap.xs.hdi-container
     parameters:

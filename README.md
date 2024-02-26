@@ -39,6 +39,12 @@ This is not required for deployment, but allows to see what artefacts are genera
 
 Ensure to be logged in to cf (`cf login`) in the correct org/space.
 
+Before deplyoment: grant access to synonyms to OO user of HDI container, otherwise deployment fails
+(see also below):
+```
+GRANT LINKED DATABASE ON REMOTE SOURCE CAP_PRF TO "975129C20F7F49A0AF1ED3302048030D#OO" WITH GRANT OPTION;
+```
+
 Deploy the model to HANA with
 ```
 cds deploy --to hana
@@ -218,8 +224,6 @@ Der #OO-User braucht ein `GRANT LINKED DATABASE ON REMOTE SOURCE CAP_PRF TO <#OO
 GRANT LINKED DATABASE ON REMOTE SOURCE CAP_PRF TO "C5BE2178A3834608A97D8F6EF34520F9#OO" WITH GRANT OPTION;
 ```
 
-
-
 [cds] - [SqlError: internal error: Error opening the cursor for the remote database <CAP_PRF> [SAP][ODBCforABAP] (42000) [SELECT:901]It is not possible to derive a type for placeholder number "0" from its context.: line 0 col 0
  in statement SELECT COUNT( ? ) FROM "/ITAPC1/SQL_FLIGHTS_1"."TravelAgency" "TravelAgency_ABAP"
 ] {
@@ -232,3 +236,12 @@ GRANT LINKED DATABASE ON REMOTE SOURCE CAP_PRF TO "C5BE2178A3834608A97D8F6EF3452
   id: '1528433',
   timestamp: 1708090478237
 }
+
+
+Local fix:
+in `node_modules/@sap/cds/libx/_runtime/db/query/read.js` line 29
+function `_createCountQuery`
+change to
+```
+  _query.SELECT.columns = [{ func: 'count', args: ['*'], as: '$count' }]
+```
