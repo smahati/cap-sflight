@@ -287,6 +287,10 @@ Logon with the user/pw given above in the creation of the remote source:
 
 Wiki on CSN Exposure Service: https://wiki.one.int.sap/wiki/display/ApplServ/CSN+-+Service+Implementation
 
+Get services:
+https://25638c75-a54b-4658-8b04-3a1156f2c4f5.abap.eu10.hana.ondemand.com/sap/opu/odata4/sap/csn_exposure_v4/srvd_a2x/sap/csn_exposure/0001/Services
+
+Find service `/ITAPC1/SQL_FLIGHTS_1`
 
 
 
