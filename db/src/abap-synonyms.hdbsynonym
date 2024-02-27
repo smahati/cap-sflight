@@ -1,0 +1,23 @@
+{ 
+  "Airline_ABAP" : { 
+     "target" : { 
+        "database" : "CAP_PRF",
+        "schema"   : "/ITAPC1/SQL_FLIGHTS_1",
+        "object"   : "Airline"
+     }
+  },
+  "TravelAgency_ABAP" : { 
+     "target" : { 
+        "database" : "CAP_PRF",
+        "schema"   : "/ITAPC1/SQL_FLIGHTS_1",
+        "object"   : "TravelAgency"
+     }
+  },
+  "Passenger_ABAP" : { 
+     "target" : { 
+        "database" : "CAP_PRF",
+        "schema"   : "/ITAPC1/SQL_FLIGHTS_1",
+        "object"   : "Passenger"
+     }
+  }
+}

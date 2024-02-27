@@ -1,0 +1,12 @@
+VIEW ext_abap_Passenger AS SELECT
+  "CustomerID"       AS CustomerID,
+  "FirstName"        AS FirstName,
+  "LastName"         AS LastName,
+  "Title"            AS Title,
+  "Street"           AS Street,
+  "PostalCode"       AS PostalCode,
+  "City"             AS City,
+  "CountryCode_code" AS CountryCode_code,
+  "PhoneNumber"      AS PhoneNumber,
+  "EMailAddress"     AS EMailAddress
+FROM "Passenger_ABAP"

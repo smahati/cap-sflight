@@ -1,0 +1,6 @@
+VIEW ext_abap_Airline AS SELECT
+  "AirlineID"         AS AirlineID,
+  "Name"              AS Name,
+  "CurrencyCode_code" AS CurrencyCode_code,
+  "AirlinePicURL"     AS AirlinePicURL
+FROM "Airline_ABAP"

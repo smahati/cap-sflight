@@ -1,11 +1,14 @@
 using { Currency, custom.managed, sap.common.CodeList } from './common';
 using {
-  sap.fe.cap.travel.Airline,
-  sap.fe.cap.travel.Passenger,
-  sap.fe.cap.travel.TravelAgency,
   sap.fe.cap.travel.Supplement,
   sap.fe.cap.travel.Flight
- } from './master-data';
+} from './master-data';
+using {
+  ext.abap.Airline,
+  ext.abap.TravelAgency,
+  ext.abap.Passenger
+} from './ext-abap';
+
 
 namespace sap.fe.cap.travel;
 

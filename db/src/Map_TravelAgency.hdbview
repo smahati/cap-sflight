@@ -1,4 +1,4 @@
-VIEW sap_fe_cap_travel_TravelAgency AS SELECT
+VIEW ext_abap_TravelAgency AS SELECT
   "AgencyID"         AS AgencyID,
   "Name"             AS Name,
   "Street"           AS Street,

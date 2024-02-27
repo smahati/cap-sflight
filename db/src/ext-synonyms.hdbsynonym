@@ -1,0 +1,8 @@
+{ 
+  "SAP_FE_CAP_TRAVEL_TRAVELAGENCY_EXT" : { 
+     "target" : { 
+        "schema" : "EXTERNAL_DATA",
+        "object" : "TRAVELAGENCY"
+     }
+  }
+}

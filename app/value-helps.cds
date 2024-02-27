@@ -1,5 +1,5 @@
 using { sap.fe.cap.travel as schema } from '../db/schema';
-
+using { ext.abap } from '../db/ext-abap';
 //
 // annotations for value helps
 //
@@ -238,9 +238,9 @@ annotate schema.FlightConnection {
 }
 
 
-annotate schema.Passenger {
+annotate abap.Passenger {
 
-  CountryCode @Common.ValueList : {
+  CountryCode_code @Common.ValueList : {
     CollectionPath  : 'Countries',
     Label : '',
     Parameters : [
@@ -253,7 +253,7 @@ annotate schema.Passenger {
 }
 
 
-annotate schema.TravelAgency {
+annotate abap.TravelAgency {
 
   CountryCode_code @Common.ValueList: {
     CollectionPath : 'Countries',

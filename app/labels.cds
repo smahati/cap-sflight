@@ -1,4 +1,5 @@
 using { sap.fe.cap.travel as schema } from '../db/schema';
+using { ext.abap } from '../db/ext-abap';
 
 //
 // annotations that control rendering of fields and labels
@@ -49,7 +50,7 @@ annotate schema.BookingSupplement with @title: '{i18n>BookingSupplement}' {
   CurrencyCode         @title: '{i18n>CurrencyCode}';
 }
 
-annotate schema.TravelAgency with @title: '{i18n>TravelAgency}' {
+annotate abap.TravelAgency with @title: '{i18n>TravelAgency}' {
   AgencyID     @title: '{i18n>AgencyID}'      @Common.Text: Name;
   Name         @title: '{i18n>AgencyName}';
   Street       @title: '{i18n>Street}';
@@ -61,7 +62,7 @@ annotate schema.TravelAgency with @title: '{i18n>TravelAgency}' {
   WebAddress   @title: '{i18n>WebAddress}';
 }
 
-annotate schema.Passenger with @title: '{i18n>Passenger}' {
+annotate abap.Passenger with @title: '{i18n>Passenger}' {
   CustomerID   @title: '{i18n>CustomerID}'    @Common.Text: LastName;
   FirstName    @title: '{i18n>FirstName}';
   LastName     @title: '{i18n>LastName}';
@@ -69,15 +70,15 @@ annotate schema.Passenger with @title: '{i18n>Passenger}' {
   Street       @title: '{i18n>Street}';
   PostalCode   @title: '{i18n>PostalCode}';
   City         @title: '{i18n>City}';
-  CountryCode  @title: '{i18n>CountryCode}';
+  CountryCode_code  @title: '{i18n>CountryCode}';
   PhoneNumber  @title: '{i18n>PhoneNumber}';
   EMailAddress @title: '{i18n>EMailAddress}';
 }
 
-annotate schema.Airline with @title: '{i18n>Airline}' {
+annotate abap.Airline with @title: '{i18n>Airline}' {
   AirlineID    @title: '{i18n>AirlineID}'     @Common.Text: Name;
   Name         @title: '{i18n>Name}';
-  CurrencyCode @title: '{i18n>CurrencyCode}';
+  CurrencyCode_code @title: '{i18n>CurrencyCode}';
 }
 
 annotate schema.Flight with @title: '{i18n>Flight}' {
