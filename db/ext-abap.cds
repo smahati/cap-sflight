@@ -24,6 +24,7 @@ entity TravelAgency {
 };
 
 @cds.persistence.exists
+@external.abap: { dbname, schema }
 entity Passenger {
   key CustomerID : String(6);
   FirstName      : String(40);
