@@ -1,13 +1,12 @@
 const cds = require ('@sap/cds');
 
 class TravelService extends cds.ApplicationService {
-init() {
+async init() {
 
   /**
    * Reflect definitions from the service's CDS model
    */
   const { Travel, Booking, BookingSupplement } = this.entities
-
 
   /**
    * Fill in primary keys for new Travels.
@@ -188,6 +187,22 @@ init() {
     } else {
       return this.read(req.subject)
     }
+  })
+
+
+  const extsrv = await cds.connect.to('TravelExtensionService')
+  this.after ('CREATE', 'Travel', travel => extsrv.OnTravelCreated (travel))
+  this.after ('UPDATE', 'Travel', travel => extsrv.OnTravelChanged (travel))
+  this.after ('rejectTravel', 'Travel', async (_,req) => {
+    let travel = await SELECT.one (req.subject, t => {
+      t.TravelID,
+      t.to_Customer.CustomerID.as(`CustomerID`),
+      t.BeginDate,
+      t.EndDate,
+      t.BookingFee,
+      t.TotalPrice
+    })
+    await extsrv.OnTravelRejected (travel)
   })
 
 

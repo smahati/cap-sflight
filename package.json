@@ -40,6 +40,9 @@
       "db": {
         "kind": "sql"
       },
+      "TravelExtensionService": {
+        "kind": "rest"
+      },
       "[production]": {
         "db": {
           "kind": "hana-cloud"
